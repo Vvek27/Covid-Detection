@@ -18,13 +18,13 @@ from tensorflow.python.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.python.ops.array_ops import shape_v2
 warnings.filterwarnings("ignore")
 
-train_path= r"C:\Users\Hp\Desktop\Visual studio\Train"
+train_path= "https://github.com/Vvek27/Covid-Detection/tree/main/Train"
 train_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True,
 zoom_range=0.2,shear_range=0.2)
 train_set=train_datagen.flow_from_directory(train_path,target_size=(256,256)
 ,batch_size=16,class_mode="binary")
 
-validation_path=r"C:\Users\Hp\Desktop\Visual studio\Validation"
+validation_path="https://github.com/Vvek27/Covid-Detection/tree/main/Validation"
 validation_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True
 ,zoom_range=0.2,shear_range=0.2)
 validation_set=validation_datagen.flow_from_directory(validation_path,target_size=(256,256)
@@ -75,7 +75,7 @@ def activity():
 
 def Images():
     if st.checkbox("Covid Images"):
-        folder_n=r"C:\Users\Hp\Desktop\Visual studio\Train\covid"
+        folder_n="https://github.com/Vvek27/Covid-Detection/tree/main/Train/covid"
         a=random.choice(os.listdir(folder_n))
         b=random.choice(os.listdir(folder_n))
         c=random.choice(os.listdir(folder_n))
@@ -85,7 +85,7 @@ def Images():
             img=image.load_img(img)
             st.image(img,width=300)
     if st.checkbox("Normal Images"):
-        folder_n=r"C:\Users\Hp\Desktop\Visual studio\Train\normal"
+        folder_n="https://github.com/Vvek27/Covid-Detection/tree/main/Train/covid"
         a=random.choice(os.listdir(folder_n))
         b=random.choice(os.listdir(folder_n))
         c=random.choice(os.listdir(folder_n))
@@ -111,7 +111,7 @@ def Prediction():
         with open (uploaded_file.name,"wb") as f:
             f.write(uploaded_file.getbuffer())
         image_name=uploaded_file.name
-        img_path=r"C:\Users\Hp\Desktop\Visual studio" + "/" + str(image_name)
+        img_path="" + "/" + str(image_name)
         img=load_img(img_path,target_size=(256,256))
         if st.checkbox("Show image"):
             st.image(img,width=400)
