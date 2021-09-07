@@ -20,7 +20,7 @@ warnings.filterwarnings("ignore")
 st.set_page_config(initial_sidebar_state="collapsed")
 
 html_temp = """
-    <div style="background-color:grey;padding:8px">
+    <div style="background-color:grey;padding:10px">
     <h2 style="color:white;text-align:center;">Covid Detection</h2>
     </div>"""
 st.markdown(html_temp,unsafe_allow_html=True)
@@ -29,7 +29,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url("https://image.freepik.com/free-photo/gray-abstract-wireframe-technology-background_53876-101941.jpg")
+        background: url("https://th.bing.com/th/id/R.856f31d9f475501c7552c97dbe727319?rik=Eq9oehb4QunXVw&riu=http%3a%2f%2fwww.baltana.com%2ffiles%2fwallpapers-5%2fWhite-Background-High-Definition-Wallpaper-16573.jpg&ehk=I38kgsJb2jc3ycTK304df0ig%2flhB3PaaXRrqcPVwDgA%3d&risl=&pid=ImgRaw&r=0")
  }
     </style>
     """,
@@ -43,6 +43,8 @@ def main():
     choice=st.sidebar.radio("",activities)
     if choice=="Select activity":
         activity()
+    if choice=="Images":
+        Images()
     if choice=="Prediction":
         Prediction()
 
@@ -56,6 +58,29 @@ def activity():
     lottie_hello=lottie_file("https://assets6.lottiefiles.com/packages/lf20_kltum0us.json")
     st_lottie( lottie_hello, speed=1, reverse=False,loop=True,quality="low",
     renderer="svg")
+    
+    
+ def Images():
+    if st.checkbox("Covid Images"):
+        folder_n="/app/covid-detection/Train/covid"
+        a=random.choice(os.listdir(folder_n))
+        b=random.choice(os.listdir(folder_n))
+        c=random.choice(os.listdir(folder_n))
+        random_n=[a,b,c]
+        for img in random_n:
+            img=folder_n + "/" + img
+            img=image.load_img(img)
+            st.image(img,width=300)
+    if st.checkbox("Normal Images"):
+        folder_n="/app/covid-detection/Train/normal"
+        a=random.choice(os.listdir(folder_n))
+        b=random.choice(os.listdir(folder_n))
+        c=random.choice(os.listdir(folder_n))
+        random_n=[a,b,c]
+        for i in range(len(random_n)):
+            img=folder_n + "/" + random_n[i]
+            img=image.load_img(img)
+            st.image(img,width=300)
     
 def Prediction():
     def classify(image,model):
