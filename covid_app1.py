@@ -79,10 +79,10 @@ def Prediction():
         if st.checkbox("Show image"):
             st.image(img,width=400)
         img=image.img_to_array(img)/255
-        img=np.array([img])# for getting 1 count for image
+        img=np.array([img])
         result=classify(img,"covid_model.h5")
         if st.button("Classify"):
-            if result[0]<0.5:
+            if result<0.5:
                 st.warning("You have covid")
                 st.write(result)
             else:
