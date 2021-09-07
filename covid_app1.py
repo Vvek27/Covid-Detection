@@ -74,7 +74,7 @@ def Prediction():
         with open (uploaded_file.name,"wb") as f:
             f.write(uploaded_file.getbuffer())
         image_name=uploaded_file.name
-        img_path="Vvek27/Covid-Detection" + "/" + str(image_name)
+        img_path="https://github.com/Vvek27/Covid-Detection" + "/" + str(image_name)
         img=load_img(img_path,target_size=(256,256))
         if st.checkbox("Show image"):
             st.image(img,width=400)
