@@ -14,22 +14,10 @@ import os,random
 import warnings
 warnings.filterwarnings("ignore")
 
-train_path= r"C:\Users\Hp\Desktop\Visual studio\Train"
-train_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True,
-zoom_range=0.2,shear_range=0.2)
-train_set=train_datagen.flow_from_directory(train_path,target_size=(256,256)
-,batch_size=16,class_mode="binary")
-
-validation_path=r"C:\Users\Hp\Desktop\Visual studio\Validation"
-validation_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True
-,zoom_range=0.2,shear_range=0.2)
-validation_set=validation_datagen.flow_from_directory(validation_path,target_size=(256,256)
-,batch_size=16,class_mode="binary")
-
 st.set_page_config(initial_sidebar_state="collapsed")
 
 html_temp = """
-    <div style="background-color:grey;padding:8px">
+    <div style="background-color:grey;padding:10px">
     <h2 style="color:white;text-align:center;">Covid Detection</h2>
     </div>"""
 st.markdown(html_temp,unsafe_allow_html=True)
@@ -67,11 +55,10 @@ def activity():
     lottie_hello=lottie_file("https://assets2.lottiefiles.com/packages/lf20_9evakyqx.json")
     st_lottie( lottie_hello, speed=1, reverse=False,loop=True,quality="low",
     renderer="svg")
-
-
+    
 def Images():
     if st.checkbox("Covid Images"):
-        folder_n=r"C:\Users\Hp\Desktop\Visual studio\Train\covid"
+        folder_n="/app/covid-detection/Train/covid"
         a=random.choice(os.listdir(folder_n))
         b=random.choice(os.listdir(folder_n))
         c=random.choice(os.listdir(folder_n))
@@ -81,7 +68,7 @@ def Images():
             img=image.load_img(img)
             st.image(img,width=300)
     if st.checkbox("Normal Images"):
-        folder_n=r"C:\Users\Hp\Desktop\Visual studio\Train\normal"
+        folder_n="/app/covid-detection/Train/normal"
         a=random.choice(os.listdir(folder_n))
         b=random.choice(os.listdir(folder_n))
         c=random.choice(os.listdir(folder_n))
@@ -90,6 +77,7 @@ def Images():
             img=folder_n + "/" + random_n[i]
             img=image.load_img(img)
             st.image(img,width=300)
+    
 def Prediction():
     def classify(image,model):
         #load model
@@ -106,62 +94,21 @@ def Prediction():
         # save the particular file
         with open (uploaded_file.name,"wb") as f:
             f.write(uploaded_file.getbuffer())
-        image_name=uploaded_file.name
-        img_path=r"C:\Users\Hp\Desktop\Visual studio" + "/" + image_name
-        img=image.load_img(img_path,target_size=(256,256))
+        image_name=uploaded_file.namme
+        img_path="/app/covid-detection" + "/" + image_name
+        img=load_img(img_path,target_size=(256,256))
         if st.checkbox("Show image"):
             st.image(img,width=400)
         img=image.img_to_array(img)/255
         img=np.array([img])
         result=classify(img,"covid_model.h5")
         if st.button("Classify"):
-            if result[0]<0.5:
+            if result<0.5:
                 st.warning("You have covid")
                 st.write(result)
             else:
                 st.success("You are healthy")
                 st.write(result)
-            
-
-
-    
-        
-    
-
-
-      
-           
-
-
-
-
-    
-    
-
-    
-
-
-         
-
-            
-
-
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+       
 if __name__=="__main__":
     main()
