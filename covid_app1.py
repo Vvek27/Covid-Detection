@@ -1,4 +1,3 @@
-from re import M
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,9 +12,6 @@ from tensorflow.keras.models import load_model
 
 import os,random
 import warnings
-from tensorflow.python.keras.preprocessing.image import img_to_array, load_img
-
-from tensorflow.python.ops.array_ops import shape_v2
 warnings.filterwarnings("ignore")
 
 train_path= r"C:\Users\Hp\Desktop\Visual studio\Train"
@@ -42,7 +38,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url("https://image.freepik.com/free-photo/gray-abstract-wireframe-technology-background_53876-101941.jpg")
+        background: url("https://th.bing.com/th/id/R.856f31d9f475501c7552c97dbe727319?rik=Eq9oehb4QunXVw&riu=http%3a%2f%2fwww.baltana.com%2ffiles%2fwallpapers-5%2fWhite-Background-High-Definition-Wallpaper-16573.jpg&ehk=I38kgsJb2jc3ycTK304df0ig%2flhB3PaaXRrqcPVwDgA%3d&risl=&pid=ImgRaw&r=0")
  }
     </style>
     """,
@@ -68,7 +64,7 @@ def activity():
         if r.status_code != 200:
             return None
         return r.json()
-    lottie_hello=lottie_file("https://assets6.lottiefiles.com/packages/lf20_kltum0us.json")
+    lottie_hello=lottie_file("https://assets2.lottiefiles.com/packages/lf20_9evakyqx.json")
     st_lottie( lottie_hello, speed=1, reverse=False,loop=True,quality="low",
     renderer="svg")
 
@@ -111,12 +107,12 @@ def Prediction():
         with open (uploaded_file.name,"wb") as f:
             f.write(uploaded_file.getbuffer())
         image_name=uploaded_file.name
-        img_path=r"C:\Users\Hp\Desktop\Visual studio" + "/" + str(image_name)
-        img=load_img(img_path,target_size=(256,256))
+        img_path=r"C:\Users\Hp\Desktop\Visual studio" + "/" + image_name
+        img=image.load_img(img_path,target_size=(256,256))
         if st.checkbox("Show image"):
             st.image(img,width=400)
         img=image.img_to_array(img)/255
-        img=np.array([img])# for getting 1 count for image
+        img=np.array([img])
         result=classify(img,"covid_model.h5")
         if st.button("Classify"):
             if result[0]<0.5:
