@@ -17,13 +17,13 @@ from tensorflow.python.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.python.ops.array_ops import shape_v2
 warnings.filterwarnings("ignore")
 
-train_path= "Covid-Detection\Train"
+train_path= "Covid-Detection"
 train_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True,
 zoom_range=0.2,shear_range=0.2)
 train_set=train_datagen.flow_from_directory(train_path,target_size=(256,256)
 ,batch_size=16,class_mode="binary")
 
-validation_path="Covid-Detection\Validation"
+validation_path="Covid-Detection"
 validation_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True
 ,zoom_range=0.2,shear_range=0.2)
 validation_set=validation_datagen.flow_from_directory(validation_path,target_size=(256,256)
