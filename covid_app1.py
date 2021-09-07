@@ -17,13 +17,13 @@ from tensorflow.python.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.python.ops.array_ops import shape_v2
 warnings.filterwarnings("ignore")
 
-train_path= "Covid-Detection/Train/"
+train_path= "C:\Users\Hp\Documents\GitHub\Covid-Detection\Train"
 train_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True,
 zoom_range=0.2,shear_range=0.2)
 train_set=train_datagen.flow_from_directory(train_path,target_size=(256,256)
 ,batch_size=16,class_mode="binary")
 
-validation_path="Covid-Detection/Validation/"
+validation_path="C:\Users\Hp\Documents\GitHub\Covid-Detection\Validation"
 validation_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True
 ,zoom_range=0.2,shear_range=0.2)
 validation_set=validation_datagen.flow_from_directory(validation_path,target_size=(256,256)
@@ -74,7 +74,7 @@ def activity():
 
 def Images():
     if st.checkbox("Covid Images"):
-        folder_n="Covid-Detection/Train/covid/"
+        folder_n="C:\Users\Hp\Documents\GitHub\Covid-Detection\Train\covid"
         a=random.choice(os.listdir(folder_n))
         b=random.choice(os.listdir(folder_n))
         c=random.choice(os.listdir(folder_n))
@@ -84,7 +84,7 @@ def Images():
             img=image.load_img(img)
             st.image(img,width=300)
     if st.checkbox("Normal Images"):
-        folder_n="Covid-Detection/Train/normal/"
+        folder_n="C:\Users\Hp\Documents\GitHub\Covid-Detection\Train\normal"
         a=random.choice(os.listdir(folder_n))
         b=random.choice(os.listdir(folder_n))
         c=random.choice(os.listdir(folder_n))
