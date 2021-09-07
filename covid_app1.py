@@ -17,6 +17,18 @@ from tensorflow.python.keras.preprocessing.image import img_to_array, load_img
 from tensorflow.python.ops.array_ops import shape_v2
 warnings.filterwarnings("ignore")
 
+train_path= "covid-detection/Train"
+train_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True,
+zoom_range=0.2,shear_range=0.2)
+train_set=train_datagen.flow_from_directory(train_path,target_size=(256,256)
+,batch_size=16,class_mode="binary")
+
+validation_path="covid-detection/Validation"
+validation_datagen=image.ImageDataGenerator(rescale=1/255,horizontal_flip=True
+,zoom_range=0.2,shear_range=0.2)
+validation_set=validation_datagen.flow_from_directory(validation_path,target_size=(256,256)
+,batch_size=16,class_mode="binary")
+
 st.set_page_config(initial_sidebar_state="collapsed")
 
 html_temp = """
@@ -43,6 +55,8 @@ def main():
     choice=st.sidebar.radio("",activities)
     if choice=="Select activity":
         activity()
+    if choice=="Images":
+        Images()
     if choice=="Prediction":
         Prediction()
 
@@ -57,6 +71,28 @@ def activity():
     st_lottie( lottie_hello, speed=1, reverse=False,loop=True,quality="low",
     renderer="svg")
 
+
+def Images():
+    if st.checkbox("Covid Images"):
+        folder_n="covid-detection/Train/covid"
+        a=random.choice(os.listdir(folder_n))
+        b=random.choice(os.listdir(folder_n))
+        c=random.choice(os.listdir(folder_n))
+        random_n=[a,b,c]
+        for img in random_n:
+            img=folder_n + "/" + img
+            img=image.load_img(img)
+            st.image(img,width=300)
+    if st.checkbox("Normal Images"):
+        folder_n="covid=detection/Train/normal"
+        a=random.choice(os.listdir(folder_n))
+        b=random.choice(os.listdir(folder_n))
+        c=random.choice(os.listdir(folder_n))
+        random_n=[a,b,c]
+        for i in range(len(random_n)):
+            img=folder_n + "/" + random_n[i]
+            img=image.load_img(img)
+            st.image(img,width=300)
 def Prediction():
     def classify(image,model):
         #load model
@@ -74,7 +110,7 @@ def Prediction():
         with open (uploaded_file.name,"wb") as f:
             f.write(uploaded_file.getbuffer())
         image_name=uploaded_file.name
-        img_path="Covid-Detection" + "/" + str(image_name)
+        img_path="Vvek27/Covid-Detection" + "/" + str(image_name)
         img=load_img(img_path,target_size=(256,256))
         if st.checkbox("Show image"):
             st.image(img,width=400)
