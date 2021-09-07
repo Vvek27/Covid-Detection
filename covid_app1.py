@@ -59,8 +59,7 @@ def activity():
     st_lottie( lottie_hello, speed=1, reverse=False,loop=True,quality="low",
     renderer="svg")
     
-    
- def Images():
+def Images():
     if st.checkbox("Covid Images"):
         folder_n="/app/covid-detection/Train/covid"
         a=random.choice(os.listdir(folder_n))
