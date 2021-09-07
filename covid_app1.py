@@ -94,7 +94,7 @@ def Prediction():
         # save the particular file
         with open (uploaded_file.name,"wb") as f:
             f.write(uploaded_file.getbuffer())
-        image_name=uploaded_file.namme
+        image_name=uploaded_file.name
         img_path="/app/covid-detection/Uploaded files" + "/" + image_name
         img=load_img(img_path,target_size=(256,256))
         if st.checkbox("Show image"):
