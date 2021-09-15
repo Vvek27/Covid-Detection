@@ -52,7 +52,7 @@ def activity():
         if r.status_code != 200:
             return None
         return r.json()
-    lottie_hello=lottie_file("https://assets2.lottiefiles.com/packages/lf20_9evakyqx.json")
+    lottie_hello=lottie_file("https://assets7.lottiefiles.com/packages/lf20_zfydw4bk.json")
     st_lottie( lottie_hello, speed=1, reverse=False,loop=True,quality="low",
     renderer="svg")
     
