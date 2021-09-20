@@ -42,8 +42,12 @@ def main():
         activity()
     if choice=="Images":
         Images()
+    if choice=="Filters":
+        Filters()
     if choice=="Prediction":
         Prediction()
+    if choice=="About":
+        About()
 
 
 def activity():
@@ -77,6 +81,22 @@ def Images():
             img=folder_n + "/" + random_n[i]
             img=image.load_img(img)
             st.image(img,width=300)
+            
+def Filters():
+    uploaded__file=st.file_uploader("Choose a X-ray image",type=["png","jpg",'jpeg'])
+    if uploaded__file is not None:
+        # save the particular file
+        with open (uploaded__file.name,"wb") as f:
+            f.write(uploaded__file.getbuffer())
+        image_nam=uploaded__file.name
+        img_Path="/app/covid-detection" + "/" + image_nam
+        img=cv2.imread(img_Path)
+        if st.checkbox("See original image"):
+            st.image(img,width=300)
+        if st.checkbox("Edge detecter"):
+            img=cv2.Canny(img,threshold1=10,threshold2=50)
+            st.image(img,width=300)
+            
     
 def Prediction():
     def classify(image,model):
@@ -109,6 +129,9 @@ def Prediction():
             else:
                 st.success("You are healthy")
                 st.write(result)
+def About():
+    st.text("Made by vivek patel")
+    st.text("2nd year M.Tech student at IIT kharagpur")
        
 if __name__=="__main__":
     main()
