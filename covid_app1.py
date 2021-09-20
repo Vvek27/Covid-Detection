@@ -5,6 +5,7 @@ import streamlit as st
 from streamlit.elements.image import image_to_url
 from streamlit_lottie import st_lottie
 import requests
+import cv2
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
